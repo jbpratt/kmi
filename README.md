@@ -4,6 +4,8 @@ This repo facilitates kubevirt machine image build and publishing pipelines.
 Pipelines are run weekly at minimum to package each distribution and version
 with the latest updates. Images can be used via tag by digest in your VirtualMachine definitions.
 This is recommended for production use.
+    
+The CCIO kmi project aims to maintain all published distributions up to date with N-1 Versions. Additional versions may also be maintained where community interest and contributor support allows.
 ### Image Criteria:
 ####    Planned
 Planned images represent distributions we hope to, or are actively working to publish and support.
@@ -45,6 +47,9 @@ These images have also automated maintenance for all required compliance includi
   - SELinux / Apparmor / Firewall is in state of compliance with published distro best practices
   - cloud-init will configure guest and users via supported cloud-config syntax*
   - Basic storage, networking, and OS functionality behaves as expected
+  - README
+    - stateless nat "Try Me" yaml or command
+    - living document of common uses and applications for the published image
   - Ready for PR to kubevirt/containerdisks upstream catalog**    
     
 *cloud-init requirement may be waived on case by case basis    
