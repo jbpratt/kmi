@@ -1,4 +1,4 @@
-# Kubevirt Container Disks
+# Kubevirt Machine Images
 This repo facilitates kubevirt machine image build and publishing pipelines.
     
 Pipelines are run weekly at minimum to package each distribution and version
