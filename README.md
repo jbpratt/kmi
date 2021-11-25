@@ -20,7 +20,7 @@ and will be upgraded to stable after consistent and sustained reliability is obs
 planned enhancements are finalized.
 ####    Stable
 Stable images have have achieved consistentcy and reliability under scrutiny for a sustained timeframe.
-These images have also automated maintenance for all required compliance including:
+These images also have automated maintenance for required compliance including:
   - Metadata
     - Source of image
     - Repository commit digest included
