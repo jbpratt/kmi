@@ -1,6 +1,6 @@
 {
   "distributions": {
-    "archlinux": {
+    "arch": {
       "latest": {
         "amd64": {
           "url": "https://mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg-20211115.39179.qcow2"
