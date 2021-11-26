@@ -1,38 +1,60 @@
 {
   "distributions": {
-    "ubuntu": {
-      "v1804": {  
-        "amd64": {"url": "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"},
-        "arm64": {"url": "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.img"}
-      },
-      "v2004": {  
-        "amd64": {"url": "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"},
-        "arm64": {"url": "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-arm64.img"}
-      },
-      "v2110": {  
-        "amd64": {"url": "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64-disk-kvm.img"},
-        "arm64": {"url": "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.img"}
-      }
-    },
-    "fedora": {
-      "v34": {  
-        "amd64": {"url": "https://download.fedoraproject.org/pub/fedora/linux/releases/34/Cloud/x86_64/images/Fedora-Cloud-Base-34-1.2.x86_64.qcow2"}
-      },
-      "v35": {  
-        "amd64": {"url": "https://download.fedoraproject.org/pub/fedora/linux/releases/35/Cloud/x86_64/images/Fedora-Cloud-Base-35-1.2.x86_64.qcow2"}
-      }
-    },
     "archlinux": {
-      "vlatest": {  
-        "amd64": {"url": "https://mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg-20211115.39179.qcow2"}
+      "latest": {
+        "amd64": {
+          "url": "https://mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg-20211115.39179.qcow2"
+        }
       }
     },
     "centos": {
-      "v8": {  
-        "amd64": {"url": ""}
+      "8": {
+        "amd64": {
+          "url": ""
+        }
       },
-      "v9": {  
-        "amd64": {"url": ""}
+      "9": {
+        "amd64": {
+          "url": ""
+        }
+      }
+    },
+    "fedora": {
+      "34": {
+        "amd64": {
+          "url": "https://download.fedoraproject.org/pub/fedora/linux/releases/34/Cloud/x86_64/images/Fedora-Cloud-Base-34-1.2.x86_64.qcow2"
+        }
+      },
+      "35": {
+        "amd64": {
+          "url": "https://download.fedoraproject.org/pub/fedora/linux/releases/35/Cloud/x86_64/images/Fedora-Cloud-Base-35-1.2.x86_64.qcow2"
+        }
+      }
+    },
+    "ubuntu": {
+      "18.04": {
+        "amd64": {
+          "url": "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
+        },
+        "arm64": {
+          "url": "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.img"
+        }
+      },
+      "20.04": {
+        "amd64": {
+          "url": "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
+        },
+        "arm64": {
+          "url": "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-arm64.img"
+        }
+      },
+      "21.10": {
+        "amd64": {
+          "url": "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64-disk-kvm.img"
+        },
+        "arm64": {
+          "url": "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.img"
+        }
       }
     }
   }

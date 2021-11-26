@@ -25,7 +25,7 @@ RUN set -x \
 
 RUN set -x \
     && echo ${BAKE_LOCAL_PLATFORM} \
-    && export DOWNLOAD_URL=$(jq -r .distributions.${FLAVOR}.v${VERSION}.${ARCH}.url index.json) \
+    && export DOWNLOAD_URL=$(jq -r .distributions.${FLAVOR}.\"${VERSION}\".${ARCH}.url index.json) \
     && echo ${ARCH} \
     && curl --output source.${FLAVOR}.qcow2 -L ${DOWNLOAD_URL} \
     && echo;
