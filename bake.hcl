@@ -22,7 +22,6 @@ target "ubuntu-defaults" {
     FLAVOR = "ubuntu",
     PKG_LIST = "screenfetch,python3,tmux,git,vim,net-tools,cloud-init,cloud-initramfs-growroot,qemu-guest-agent"
     OPERATIONS = "user-account,logfiles,customize,bash-history,net-hostname,net-hwaddr,machine-id,dhcp-server-state,dhcp-client-state,yum-uuid,udev-persistent-net,tmp-files,smolt-uuid,rpm-db,package-manager-cache"
-    ARCH = "amd64"
   }
 }
 
@@ -69,7 +68,6 @@ target "arch" {
     FLAVOR = "arch",
     PKG_LIST = "screenfetch,python3,tmux,git,vim,net-tools,qemu-guest-agent,libguestfs"
     OPERATIONS = "logfiles,customize,bash-history,net-hostname,net-hwaddr,machine-id,dhcp-server-state,dhcp-client-state,tmp-files,smolt-uuid,package-manager-cache"
-    ARCH = "amd64"
     VERSION = "latest"
   }
 }

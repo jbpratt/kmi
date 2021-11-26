@@ -3,8 +3,10 @@
 FROM docker.io/bkahlert/libguestfs as sysprep
 #FROM docker.io/containercraft/sysprep:testing as sysprep
 
+# https://docs.docker.com/engine/reference/builder/#automatic-platform-args-in-the-global-scope
+ARG BUILDARCH
 ARG TARGETARCH
-ARG ARCH=${ARCH}
+
 ARG FLAVOR=${FLAVOR}
 ARG VERSION=${VERSION}
 ARG PKG_LIST=${PKG_LIST}
@@ -21,12 +23,11 @@ RUN set -x \
     && echo;
 
 COPY kmi/preview/${FLAVOR}/firstboot.sh firstboot.sh
-COPY index.json          index.json
+COPY index.json                         index.json
 
 RUN set -x \
-    && echo ${BAKE_LOCAL_PLATFORM} \
-    && export DOWNLOAD_URL=$(jq -r .distributions.${FLAVOR}.\"${VERSION}\".${ARCH}.url index.json) \
-    && echo ${ARCH} \
+    && echo "build arch: ${BUILDARCH}\ntarget arch: ${TARGETARCH}" \
+    && export DOWNLOAD_URL=$(jq -r .distributions.${FLAVOR}.\"${VERSION}\".${TARGETARCH}.url index.json) \
     && curl --output source.${FLAVOR}.qcow2 -L ${DOWNLOAD_URL} \
     && echo;
 
