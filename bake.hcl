@@ -1,5 +1,6 @@
 # https://docs.docker.com/engine/reference/commandline/buildx_bake
-# FLAG=$(git rev-parse --short HEAD) docker buildx bake -f bake.hcl --builder honeypot --progress tty --load
+# docker buildx create --driver docker-container --name builder --use
+# FLAG=$(git rev-parse --short HEAD) docker buildx bake -f bake.hcl --builder builder --progress tty --load
 
 variable "FLAG" {
   default = "dev"
@@ -15,10 +16,12 @@ group "ubuntu" {
 
 target "ubuntu-defaults" {
   dockerfile = "Containerfile"
-  platforms = ["linux/arm64", "linux/amd64"]
+  platforms = ["linux/arm64"]
+  #platforms = ["linux/arm64", "linux/amd64"]
   args = {
     FLAVOR = "ubuntu",
     PKG_LIST = "screenfetch,python3,tmux,git,vim,net-tools,cloud-init,cloud-initramfs-growroot,qemu-guest-agent"
+    ARCH = "arm64"
   }
 }
 

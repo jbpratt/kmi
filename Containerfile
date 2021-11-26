@@ -1,4 +1,6 @@
-FROM docker.io/bkahlert/libguestfs:edge as sysprep
+# ENTIRE Containerfile is POC
+# TODO: Build UBI based sys-preptools / libguestfs multi-arch containers to resolve most lines of code below
+FROM docker.io/bkahlert/libguestfs as sysprep
 #FROM docker.io/containercraft/sysprep:testing as sysprep
 
 ARG TARGETARCH
@@ -16,11 +18,17 @@ COPY kmi/preview/ubuntu/firstboot.sh firstboot.sh
 # Download Image
 # TODO: need to convert ${VERSION} from integer to string 
 RUN set -x \
-    && apt-get update && apt-get install jq -y \
+    && apt-get update \
+    && apt-get install apt-utils -y \
+    && apt-get install jq -y \
+    && echo;
+
+RUN set -x \
     && echo ${BAKE_LOCAL_PLATFORM} \
-    && export DOWNLOAD_URL=$(jq .distributions.${FLAVOR}.v${VERSION}.${ARCH}.url index.json) \
-    && echo ${BAKE_LOCAL_PLATFORM} \
-    && curl --output source.${FLAVOR}.qcow2 -L ${DOWNLOAD_URL}
+    && export DOWNLOAD_URL=$(jq -r .distributions.${FLAVOR}.v${VERSION}.${ARCH}.url index.json) \
+    && echo ${ARCH} \
+    && curl --output source.${FLAVOR}.qcow2 -L ${DOWNLOAD_URL} \
+    && echo;
 
 RUN set -ex \
     && qemu-img resize source.${FLAVOR}.qcow2 +20G                                \
@@ -32,6 +40,7 @@ RUN set -ex \
 RUN set -ex \
     && virt-sysprep -va ${FLAVOR}.qcow2                                           \
          --network                                                                \
+         --update                                                                 \
          --firstboot firstboot.sh \
          --enable user-account,logfiles,customize,bash-history,net-hostname,net-hwaddr,machine-id,dhcp-server-state,dhcp-client-state,yum-uuid,udev-persistent-net,tmp-files,smolt-uuid,rpm-db,package-manager-cache \
     && virt-sparsify --compress ${FLAVOR}.qcow2 ${FLAVOR}.sparse.qcow2            \
