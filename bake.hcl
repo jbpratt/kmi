@@ -7,11 +7,11 @@ variable "FLAG" {
 }
 
 group "default" {
-  targets = ["ubuntu"]
+  targets = ["ubuntu", "arch"]
 }
 
 group "ubuntu" {
-  targets = ["ubuntu-1804", "ubuntu-2004", "ubuntu-2110"]
+  targets = ["ubuntu-18.04", "ubuntu-20.04", "ubuntu-21.10"]
 }
 
 target "ubuntu-defaults" {
@@ -21,39 +21,53 @@ target "ubuntu-defaults" {
   args = {
     FLAVOR = "ubuntu",
     PKG_LIST = "screenfetch,python3,tmux,git,vim,net-tools,cloud-init,cloud-initramfs-growroot,qemu-guest-agent"
-    ARCH = "amd64"
+    OPERATIONS = "user-account,logfiles,customize,bash-history,net-hostname,net-hwaddr,machine-id,dhcp-server-state,dhcp-client-state,yum-uuid,udev-persistent-net,tmp-files,smolt-uuid,rpm-db,package-manager-cache"
   }
 }
 
-target "ubuntu-1804" {
+target "ubuntu-18.04" {
   inherits = ["ubuntu-defaults"]
   tags = [
     "docker.io/containercraft/ubuntu:1804-${FLAG}",
     "docker.io/containercraft/ubuntu:bionic-${FLAG}"
   ]
   args = {
-    VERSION = "1804"
+    VERSION = "18.04"
   }
 }
 
-target "ubuntu-2004" {
+target "ubuntu-20.04" {
   inherits = ["ubuntu-defaults"]
   tags = [
-    "docker.io/containercraft/ubuntu:2004-${FLAG}",
+    "docker.io/containercraft/ubuntu:20.04-${FLAG}",
     "docker.io/containercraft/ubuntu:focal-${FLAG}"
   ]
   args = {
-    VERSION = "2004"
+    VERSION = "20.04"
   }
 }
 
-target "ubuntu-2110" {
+target "ubuntu-21.10" {
   inherits = ["ubuntu-defaults"]
   tags = [
     "docker.io/containercraft/ubuntu:2110-${FLAG}",
     "docker.io/containercraft/ubuntu:impish-${FLAG}"
   ]
   args = {
-    VERSION = "2110"
+    VERSION = "21.10"
+  }
+}
+
+target "arch" {
+  dockerfile = "Containerfile"
+  platforms = ["linux/amd64"]
+  tags = [
+    "docker.io/containercraft/arch:latest-${FLAG}"
+  ]
+  args = {
+    FLAVOR = "arch",
+    PKG_LIST = "screenfetch,python3,tmux,git,vim,net-tools,qemu-guest-agent,libguestfs"
+    OPERATIONS = "logfiles,customize,bash-history,net-hostname,net-hwaddr,machine-id,dhcp-server-state,dhcp-client-state,tmp-files,smolt-uuid,package-manager-cache"
+    VERSION = "latest"
   }
 }
