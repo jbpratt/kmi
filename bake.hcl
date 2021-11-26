@@ -6,11 +6,11 @@ variable "FLAG" {
 }
 
 group "default" {
-  targets = ["ubuntu-20.04"]
+  targets = ["ubuntu-2004"]
 }
 
 group "ubuntu" {
-  targets = ["ubuntu-18.04", "ubuntu-20.04", "ubuntu-21.10"]
+  targets = ["ubuntu-1804", "ubuntu-2004", "ubuntu-2110"]
 }
 
 group "fedora" {
@@ -22,15 +22,16 @@ group "centos-stream" {
 }
 
 target "ubuntu-defaults" {
-  dockerfile = "preview/Containerfile"
+  dockerfile = "Containerfile"
   platforms = ["linux/arm64"]
   args = {
     FLAVOR = "ubuntu",
+    PKG_LIST = "screenfetch,python3,tmux,git,vim,net-tools,cloud-init,cloud-initramfs-growroot,qemu-guest-agent"
   }
 }
 
 target "fedora-defaults" {
-  dockerfile = "preview/Containerfile"
+  dockerfile = "Containerfile"
   platforms = ["linux/amd64"]
   args = {
     FLAVOR = "fedora",
@@ -38,43 +39,44 @@ target "fedora-defaults" {
 }
 
 target "centos-stream-defaults" {
-  dockerfile = "preview/Containerfile"
+  dockerfile = "Containerfile"
   platforms = ["linux/amd64"]
   args = {
     FLAVOR = "centos-stream",
   }
 }
 
-target "ubuntu-18.04" {
+target "ubuntu-1804" {
   inherits = ["ubuntu-defaults"]
   tags = [
-    "docker.io/containercraft/ubuntu:18.04-${FLAG}",
+    "docker.io/containercraft/ubuntu:1804-${FLAG}",
     "docker.io/containercraft/ubuntu:bionic-${FLAG}"
   ]
   args = {
-    VERSION = "18.04"
+    VERSION = "1804"
   }
 }
 
-target "ubuntu-20.04" {
+target "ubuntu-2004" {
   inherits = ["ubuntu-defaults"]
+  platforms = ["linux/arm64"]
   tags = [
-    "docker.io/containercraft/ubuntu:20.04-${FLAG}",
+    "docker.io/containercraft/ubuntu:2004-${FLAG}",
     "docker.io/containercraft/ubuntu:focal-${FLAG}"
   ]
   args = {
-    VERSION = "20.04"
+    VERSION = "2004"
   }
 }
 
-target "ubuntu-21.10" {
+target "ubuntu-2110" {
   inherits = ["ubuntu-defaults"]
   tags = [
-    "docker.io/containercraft/ubuntu:21.10-${FLAG}",
+    "docker.io/containercraft/ubuntu:2110-${FLAG}",
     "docker.io/containercraft/ubuntu:impish-${FLAG}"
   ]
   args = {
-    VERSION = "21.10"
+    VERSION = "2110"
   }
 }
 
@@ -99,7 +101,7 @@ target "fedora-35" {
 }
 
 target "arch" {
-  dockerfile = "preview/Containerfile"
+  dockerfile = "Containerfile"
   platforms = ["linux/amd64"]
   tags = [
     "docker.io/containercraft/arch:latest-${FLAG}",
