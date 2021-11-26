@@ -4,14 +4,13 @@ on:
 
 jobs:
   build:
-    #runs-on: ubuntu-20.04
     runs-on:
-      - linux
-      - x86_64
-      - self-hosted
+    - "self-hosted"
+    - "linux"
+    - "x64"
     steps:
 
-      - name: Code Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v2.4.0
 
       - name: Set up QEMU
@@ -27,4 +26,4 @@ jobs:
       - name: Build
         uses: docker/bake-action@v1
         with:
-          files: preview/bake.hcl
+          files: bake.hcl
