@@ -1,0 +1,14 @@
+FROM docker.io/bkahlert/libguestfs:edge
+USER root
+
+ARG TARGETARCH
+ARG FLAVOR=${FLAVOR}
+ARG VERSION=${VERSION}
+ARG PKG_LIST=${PKG_LIST}
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+WORKDIR /disk
+
+copy jq jq
+
+RUN set -ex \
+    && ./jq --version
