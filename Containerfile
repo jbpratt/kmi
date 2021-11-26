@@ -12,16 +12,16 @@ ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 WORKDIR /disk
 
-COPY index.json          index.json
-COPY kmi/preview/ubuntu/firstboot.sh firstboot.sh
-
 # Download Image
-# TODO: need to convert ${VERSION} from integer to string 
+# TODO: need to convert ${VERSION} from integer to string
 RUN set -x \
     && apt-get update \
     && apt-get install apt-utils -y \
     && apt-get install jq -y \
     && echo;
+
+COPY kmi/preview/ubuntu/firstboot.sh firstboot.sh
+COPY index.json          index.json
 
 RUN set -x \
     && echo ${BAKE_LOCAL_PLATFORM} \
