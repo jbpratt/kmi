@@ -16,12 +16,12 @@ group "ubuntu" {
 
 target "ubuntu-defaults" {
   dockerfile = "Containerfile"
-  platforms = ["linux/arm64"]
+  platforms = ["linux/amd64"]
   #platforms = ["linux/arm64", "linux/amd64"]
   args = {
     FLAVOR = "ubuntu",
     PKG_LIST = "screenfetch,python3,tmux,git,vim,net-tools,cloud-init,cloud-initramfs-growroot,qemu-guest-agent"
-    ARCH = "arm64"
+    ARCH = "amd64"
   }
 }
 
