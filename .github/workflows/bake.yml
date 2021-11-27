@@ -11,6 +11,8 @@ jobs:
     strategy:
       matrix:
         target: [ubuntu]
+    outputs:
+      metadata: ${{ steps.bake.outputs.metadata }}
     steps:
 
       - name: Checkout Repository
@@ -25,6 +27,7 @@ jobs:
 
       - name: Build
         uses: docker/bake-action@v1
+        id: bake
         with:
           files: bake.hcl
           set: |
@@ -39,6 +42,8 @@ jobs:
     strategy:
       matrix:
         target: [ubuntu]
+    outputs:
+      metadata: ${{ steps.bake.outputs.metadata }}
     steps:
 
       - name: Checkout Repository
@@ -53,8 +58,18 @@ jobs:
 
       - name: Build
         uses: docker/bake-action@v1
+        id: bake
         with:
           files: bake.hcl
           set: |
             *.platform=linux/arm64
           targets: ${{ matrix.target }}
+
+  publish-manifest:
+    runs-on: ubuntu-20.04
+    needs: [build-amd64, build-arm64]
+    steps:
+      - name: Print build outputs
+        run: |
+          echo ${{ needs.build-amd64.outputs.metadata }}
+          echo ${{ needs.build-arm64.outputs.metadata }}
